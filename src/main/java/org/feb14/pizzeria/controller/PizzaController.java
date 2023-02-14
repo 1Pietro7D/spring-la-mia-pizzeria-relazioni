@@ -21,6 +21,6 @@ public class PizzaController {
 		public String index(Model modIndex) {
 			List<Pizza> pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze libro
 			modIndex.addAttribute("pizze", pizzaList);
-			return "index";
+			return "pizza/index";
 			}
 }
