@@ -8,6 +8,10 @@
 <body>
 <!--h1>title of <b th:text="example"></b></h1-->
 <div th:if="${pizze.size()==0}" >La lista è vuota</div>
-<div th:if="${pizze.size()>0}" th:each="pizza : ${pizze}">[[${pizza.name}]]</div>
+<div th:if="${pizze.size()>0}" th:each="pizza : ${pizze}">
+ <a th:href="@{pizze/{id}(id=${#strings.toString(pizza.id)})}">
+    [[${pizza.name}]]
+  </a>
+</div>
 </body>
 </html>
