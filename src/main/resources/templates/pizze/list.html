@@ -13,5 +13,10 @@
     [[${pizza.name}]]
   </a>
 </div>
+ <form method="get" th:action="@{/pizze}">
+    <label for="search">Filtra per nome:</label>
+    <input type="text" id="search" name="keyword" />
+    <button type="submit">Cerca</button>
+  </form>
 </body>
 </html>
