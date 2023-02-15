@@ -1,0 +1,4 @@
+INSERT INTO springpizzeriacrud.pizze(description, img_path, name, price) VALUES('mozzarella, pomodoro', 'https://picsum.photos/200/300', 'margherita', 6.50);
+INSERT INTO springpizzeriacrud.pizze(description, img_path, name, price) VALUES('di tutto e di più', 'https://picsum.photos/200/300', 'fantasia del pizzaiolo', 10);
+INSERT INTO springpizzeriacrud.pizze(description, img_path, name, price) VALUES('misto mare', 'https://picsum.photos/200/300', 'sapori di mare', 9);
+INSERT INTO springpizzeriacrud.pizze(description, img_path, name, price) VALUES('ananas, na cosa barbarica', 'https://picsum.photos/200/300', 'ananas', 3.5);

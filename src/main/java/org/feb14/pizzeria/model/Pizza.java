@@ -1,5 +1,7 @@
 package org.feb14.pizzeria.model;
 
+import java.math.BigDecimal;
+
 //// https://jakarta.ee/specifications/persistence/3.1/apidocs/index.html
 
 import jakarta.annotation.Nonnull;
@@ -13,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="pizza")
+@Table(name="pizze")
 public class Pizza {
 	
 	@Id
@@ -34,7 +36,7 @@ public class Pizza {
 	
 	@Nonnull
 	@Column(nullable=false)
-	private double price;
+	private BigDecimal price;
 	
 	public String getName() {
 		return name;
@@ -61,11 +63,11 @@ public class Pizza {
 		this.imgPath = imgPath;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

@@ -2,10 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>home</title>
+<title>[[${pizza.name}]]</title>
 <th:block th:replace="~{frag/fragments :: bootstrap}"></th:block> <!-- versione più intuitiva -->
 </head>
 <body>
+<h1>Pizza's detail</h1>
+<div>[[${pizza.name}]]</div>
+<!--/* div>ingredienti: [[${pizza.description}]]</div>
+<div>prezzo: [[${pizza.price}]]€</div> */-->
 <a th:href="@{/pizze}">Vedi lista pizze</a>
 
 </body>

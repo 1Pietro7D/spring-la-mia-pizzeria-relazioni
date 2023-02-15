@@ -2,10 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>home</title>
+<title>error</title>
 <th:block th:replace="~{frag/fragments :: bootstrap}"></th:block> <!-- versione più intuitiva -->
 </head>
 <body>
+
+<h1>Si è verificato un'errore nella ricerca del piatto</h1>
+<p>In questo caso stai cercando una pizza che non esiste</p>
 <a th:href="@{/pizze}">Vedi lista pizze</a>
 
 </body>

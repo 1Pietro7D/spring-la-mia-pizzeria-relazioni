@@ -2,18 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-<title>title</title>
-	<th:block th:fragments="bootstrap">
-	<!-- Required meta tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- Bootstrap CSS -->
-	<link th:rel="stylesheet"
-		th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}" />
-	<!-- Bootstrap JS -->
-	<script th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js}"
-		defer></script>
-	</th:block>
+<title>listino</title>
+	<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block>
 </head>
 <body>
 <!--h1>title of <b th:text="example"></b></h1-->
