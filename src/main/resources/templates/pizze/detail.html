@@ -8,6 +8,9 @@
 <body>
 <h1>Pizza's detail</h1>
 <div>[[${pizza.name}]]</div>
+<div>[[${pizza.description}]]</div>
+<div>[[${pizza.price}]]€</div>
+<div><img th:src="${pizza.imgPath}"/></div>
 <!--/* div>ingredienti: [[${pizza.description}]]</div>
 <div>prezzo: [[${pizza.price}]]€</div> */-->
 <a th:href="@{/pizze}">Vedi lista pizze</a>
