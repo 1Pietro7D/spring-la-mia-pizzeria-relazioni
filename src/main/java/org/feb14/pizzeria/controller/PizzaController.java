@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/pizze")
@@ -20,8 +21,14 @@ public class PizzaController {
 	private @Autowired PizzaRepository pizzaRepository;
 
 	@GetMapping
-	public String index(Model modList) {
-		List<Pizza> pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze libro
+	public String index(@RequestParam(name="keyword", required = false) String keyword, Model modList) { 
+		// http://localhost:8080/pizze?keyword=margh
+		List<Pizza> pizzaList;
+		if(keyword == null) {
+			pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze libro
+		}else {
+			pizzaList = pizzaRepository.findByNameLike("%"+keyword+"%");
+		}
 		modList.addAttribute("pizze", pizzaList);
 		return "pizze/list";
 	}
