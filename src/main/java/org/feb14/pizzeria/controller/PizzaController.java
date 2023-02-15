@@ -18,9 +18,10 @@ public class PizzaController {
 		private @Autowired PizzaRepository pizzaRepository;
 		
 		@GetMapping
-		public String index(Model modIndex) {
+		public String index(Model modList) {
 			List<Pizza> pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze libro
-			modIndex.addAttribute("pizze", pizzaList);
-			return "pizza/index";
+			modList.addAttribute("pizze", pizzaList);
+			return "pizze/list";
 			}
+		
 }
