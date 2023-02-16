@@ -13,6 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="pizze")
@@ -22,20 +25,25 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Nonnull
-	@Column(length = 50 , nullable = false , unique = false)
+	@NotNull
+	@NotEmpty
+	@Column(length = 50 , unique = false)
 	private String name;
 	
-	@Nonnull
-	@Column(length = 300 , nullable = false , unique = false)
+	// @Nonnull // Non gestisce la validazione per il db
+	@Column(length = 300 , unique = false) // nullable = false , non gestisce la validazione lato client
+	// TODO : lenght = 300, ritorna un varchar(300) è possibile come cosa?
+	@NotNull // gestisce lato client e server
+	@NotEmpty
 	private String description;
 	
-	@Nonnull
+	
 	@Column(nullable=false)
 	private String imgPath;
 	
-	@Nonnull
-	@Column(nullable=false)
+	
+	@NotNull
+	@DecimalMin(value = "0.01", message = "Il prezzo deve essere maggiore di zero")
 	private BigDecimal price;
 	
 	public String getName() {
