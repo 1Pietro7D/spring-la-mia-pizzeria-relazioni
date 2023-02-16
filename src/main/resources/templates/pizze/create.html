@@ -43,7 +43,7 @@
 			   <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
 			</ul>
   		</div>
-  		<input type="text" class="form-control d-none" value="https://picsum.photos/200/300" th:field="*{imgPath}"/> <!-- TODO : img not visible -->
+  		<input type="text" class="d-none" value="https://picsum.photos/200/300" name="imgPath"/> 
   		<button type="submit" class="btn btn-primary">Salva</button>
   		</div>
   		</div>

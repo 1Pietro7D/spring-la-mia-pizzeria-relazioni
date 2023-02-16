@@ -36,7 +36,7 @@ public class PizzaController {
 			pizzaList = pizzaRepository.findByNameLike("%" + keyword + "%");
 		}
 		modList.addAttribute("pizze", pizzaList);
-		return "pizze/list";
+		return "pizze/index";
 	}
 
 	@GetMapping("/{id}")
