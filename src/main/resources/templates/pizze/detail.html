@@ -11,7 +11,7 @@
 <div>[[${pizza.description}]]</div>
 <div>[[${pizza.price}]]€</div>
 <div><img th:src="${pizza.imgPath}"/></div>
-<!--/*a th:href="@{/pizze/{id}/edit(id=${pizza.id})}" class="btn btn-primary">Edit</a*/-->
+<a th:href="@{./edit/{id}(id=${pizza.id})}" class="btn btn-primary">Edit</a>
 
  <button th:data-pizzaId="${pizza.id}" onclick="deletePizza(this)">Delete</button>
 <script th:inline="javascript">
@@ -23,7 +23,8 @@
       })
       .then(response => {
     	  if (response.ok) {
-    	        window.location.href = '../pizze';
+//     	        window.location.href = '../pizze';
+    		  window.location.pathname = '/pizze';
     	      } else {
     	    	 console.log(response)
     	        alert('Error deleting pizza');

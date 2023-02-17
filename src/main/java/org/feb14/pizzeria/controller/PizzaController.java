@@ -80,6 +80,25 @@ public class PizzaController {
 
 	}
 	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable("id") Integer id, Model model) {
+		Pizza pizza = pizzaRepository.getReferenceById(id);
+		model.addAttribute("pizza",pizza);
+		return "pizze/update";
+	}
+	
+	@PostMapping("/edit/{id}")
+	public String update(
+			@Valid @ModelAttribute Pizza formPizza,
+			BindingResult result, Model model
+			) {
+		if(result.hasErrors())
+			return "pizze/update";
+		
+		pizzaRepository.save(formPizza);
+		return "redirect:/pizze"; 
+	}
+	
 	@DeleteMapping("deletejs/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
 	    
