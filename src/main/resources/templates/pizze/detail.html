@@ -18,11 +18,16 @@
   function deletePizza(button) {
 	const id = button.getAttribute('data-pizzaId');
     if (confirm("Are you sure you want to delete this pizza?")) {
-      fetch( id, {
+      fetch( "delete/" + id, {
         method: 'DELETE'
       })
       .then(response => {
-          window.location.href = '../pizze';
+    	  if (response.ok) {
+    	        window.location.href = '../pizze';
+    	      } else {
+    	    	 console.log(response)
+    	        alert('Error deleting pizza');
+    	      }
       });
     }
   }

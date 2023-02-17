@@ -8,6 +8,7 @@ import org.feb14.pizzeria.repository.PizzaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,15 +47,16 @@ public class PizzaController {
 	public String show(@PathVariable("id") String id, Model modShow) {
 		try {
 			Integer validId = Integer.parseInt(id);
-			try {
+			
+			
 				Optional<Pizza> pizza = pizzaRepository.findById(validId); // restituisce un'istanza Optional con dentro
 																			// forse una pizza
-
+				if(pizza.isPresent()) {
 				modShow.addAttribute("pizza", pizza.get());
 				return "pizze/detail";
-			} catch (Exception e) {
+				}
 				return "/errorPage";
-			}
+			
 		} catch (NumberFormatException e) {
 			return "/errorPage";
 		}
@@ -76,7 +79,9 @@ public class PizzaController {
 		return "redirect:/pizze"; // genera un altro get e il ciclo si chiude
 
 	}
-	@DeleteMapping("/{id}")
+
+	
+	/*@DeleteMapping("delete/{id}")
 	public String deletePizza(@PathVariable("id") Integer id) {
 	    try {
 	        pizzaRepository.deleteById(id);
@@ -84,6 +89,14 @@ public class PizzaController {
 	    } catch (EmptyResultDataAccessException e) {
 	        return "error";
 	    }
+	}*/
+	@DeleteMapping("delete/{id}")
+	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
+	    
+	        pizzaRepository.deleteById(id);
+	        return ResponseEntity.ok("Pizza deleted successfully");
+	       
+	   
 	}
 
 }
