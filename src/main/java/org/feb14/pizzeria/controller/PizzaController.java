@@ -79,24 +79,20 @@ public class PizzaController {
 		return "redirect:/pizze"; // genera un altro get e il ciclo si chiude
 
 	}
-
 	
-	/*@DeleteMapping("delete/{id}")
-	public String deletePizza(@PathVariable("id") Integer id) {
-	    try {
-	        pizzaRepository.deleteById(id);
-	        return "redirect:/pizze";
-	    } catch (EmptyResultDataAccessException e) {
-	        return "error";
-	    }
-	}*/
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("deletejs/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
 	    
 	        pizzaRepository.deleteById(id);
 	        return ResponseEntity.ok("Pizza deleted successfully");
-	       
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+	 
+	   pizzaRepository.deleteById(id);
 	   
+	   return "redirect:/pizze";
 	}
 
 }
