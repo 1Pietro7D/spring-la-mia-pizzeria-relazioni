@@ -1,35 +1,20 @@
 package org.feb14.pizzeria.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.feb14.pizzeria.model.Pizza;
 import org.feb14.pizzeria.repository.OffertaSpecialeRepository;
 import org.feb14.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import jakarta.validation.Valid;
 
 
 @Controller
-@RequestMapping("/pizze")
-public class PizzaController {
+@RequestMapping("/offerte")
+public class OffertaSpecialeController {
 	// iniettiamo automaticamente
 	private @Autowired PizzaRepository pizzaRepository;
 	private @Autowired OffertaSpecialeRepository offertaRepository;
 
-	@GetMapping
+	/*@GetMapping
 	public String index(@RequestParam(name = "keyword", required = false) String keyword, Model modList) {
 		// http://localhost:8080/pizze?keyword=margh
 		List<Pizza> pizzaList;
@@ -105,6 +90,5 @@ public class PizzaController {
 	   pizzaRepository.deleteById(id);
 	   
 	   return "redirect:/pizze";
-	}
-
+	}*/
 }

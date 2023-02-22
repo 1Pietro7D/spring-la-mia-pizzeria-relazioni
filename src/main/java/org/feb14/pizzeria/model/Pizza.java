@@ -1,10 +1,8 @@
 package org.feb14.pizzeria.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-//// https://jakarta.ee/specifications/persistence/3.1/apidocs/index.html
-
-import jakarta.annotation.Nonnull;
 // https://docs.oracle.com/javaee/7/api/javax/persistence/Column.html
 // https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/column
 import jakarta.persistence.Column;
@@ -12,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
@@ -46,10 +45,21 @@ public class Pizza {
 	@DecimalMin(value = "0.01", message = "Il prezzo deve essere maggiore di zero")
 	private BigDecimal price;
 	
+	@OneToMany(mappedBy = "pizza")
+	private List<OffertaSpeciale> offerte;
+	
 	public String getName() {
 		return name;
 	}
 	
+	public List<OffertaSpeciale> getOfferte() {
+		return offerte;
+	}
+
+	public void setOfferte(List<OffertaSpeciale> offerte) {
+		this.offerte = offerte;
+	}
+
 	// Getter and Setting
 	public void setName(String name) {
 		this.name = name;
