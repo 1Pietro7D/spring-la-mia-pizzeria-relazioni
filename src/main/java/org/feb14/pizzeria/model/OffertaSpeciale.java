@@ -66,6 +66,6 @@ public class OffertaSpeciale {
 
 	public void setPizza(Pizza pizza) {
 		this.pizza = pizza;
-	}
+	} 
 
 }
