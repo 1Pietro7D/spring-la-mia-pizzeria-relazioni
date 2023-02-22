@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Crea offerta</title>
+<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block> <!-- versione più intuitiva -->
+</head>
+<body>
+<div class="container">
+	<h1>Nuova Offerta</h1>
+	<hr/>
+	<form id="offerta-form" th:object="${offerta}"
+	  th:action="@{/offerte/store}"  method="post">
+	  	<ul>
+	      <li 
+	         th:each="err : ${#fields.allErrors()}" 
+	         th:text="${err}" class="text-danger">
+	      </li>
+  		</ul>
+	  	<div class="row">
+	  	<div class="col-8">
+	  	<label for="titolo" class="form-label">Titolo:</label>
+  		<input type="text" class="form-control" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid"/>  			
+		<div th:if="${#fields.hasErrors('titolo')}" class="invalid-feedback">
+			<ul>
+			   <li th:each="err : ${#fields.errors('titolo')}" th:text="${err}"></li>
+			</ul>
+  		</div>
+  		
+  		
+	  
+  		<input type="hidden" th:field="${offerta.pizza}"/> 
+  		<button type="submit" class="btn btn-primary">Salva</button>
+  		</div>
+  		</div>
+	</form>
+	</div>
+</body>
+</html>
