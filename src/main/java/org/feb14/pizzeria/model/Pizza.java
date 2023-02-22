@@ -45,7 +45,7 @@ public class Pizza {
 	@DecimalMin(value = "0.01", message = "Il prezzo deve essere maggiore di zero")
 	private BigDecimal price;
 	
-	@OneToMany(mappedBy = "pizza")
+	@OneToMany(mappedBy = "pizza")//  l'attributo di "mappedBy" punta alla proprietà nell'entità OffertaSpeciale.
 	private List<OffertaSpeciale> offerte;
 	
 	public String getName() {

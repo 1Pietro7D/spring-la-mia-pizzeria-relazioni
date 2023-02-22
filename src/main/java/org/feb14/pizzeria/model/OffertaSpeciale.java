@@ -61,7 +61,7 @@ public class OffertaSpeciale {
 	}
 
 	public Pizza getPizza() {
-		return pizza;
+		return pizza; //attributo a cui puntiamo da Pizza
 	}
 
 	public void setPizza(Pizza pizza) {
