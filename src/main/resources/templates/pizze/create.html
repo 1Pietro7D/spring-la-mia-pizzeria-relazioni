@@ -10,7 +10,7 @@
 	<h1>Nuova pizza</h1>
 	<hr/>
 	<form id="pizza-form" th:object="${pizza}"
-	  th:action="@{/pizze/create}"  method="post">
+	  th:action="@{/pizze/store}"  method="post">
 	  	<ul>
 	      <li 
 	         th:each="err : ${#fields.allErrors()}" 

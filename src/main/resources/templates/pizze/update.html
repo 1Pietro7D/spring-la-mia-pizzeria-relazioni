@@ -9,7 +9,7 @@
 <div class="container">
 	<h1>Nuova pizza</h1>
 	<hr/>
-	<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/edit/{id}(id=${pizza.id})}"  method="post">
+	<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/update/{id}(id=${pizza.id})}"  method="post">
 	  	<ul>
 	      <li 
 	         th:each="err : ${#fields.allErrors()}" 
