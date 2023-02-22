@@ -3,6 +3,7 @@ package org.feb14.pizzeria.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 // https://docs.oracle.com/javaee/7/api/javax/persistence/Column.html
 // https://jakarta.ee/specifications/persistence/3.1/apidocs/jakarta.persistence/jakarta/persistence/column
 import jakarta.persistence.Column;
@@ -45,7 +46,7 @@ public class Pizza {
 	@DecimalMin(value = "0.01", message = "Il prezzo deve essere maggiore di zero")
 	private BigDecimal price;
 	
-	@OneToMany(mappedBy = "pizza")//  l'attributo di "mappedBy" punta alla proprietà nell'entità OffertaSpeciale.
+	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE)//  l'attributo di "mappedBy" punta alla proprietà nell'entità OffertaSpeciale.
 	private List<OffertaSpeciale> offerte;
 	
 	public String getName() {

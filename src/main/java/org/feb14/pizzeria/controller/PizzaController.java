@@ -94,7 +94,8 @@ public class PizzaController {
 	
 	@DeleteMapping("deletejs/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
-	    
+		// elimina a cascata tutte le offerte relazionate alla pizza
+        
 	        pizzaRepository.deleteById(id);
 	        return ResponseEntity.ok("Pizza deleted successfully");
 	}

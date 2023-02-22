@@ -82,8 +82,8 @@ public class OffertaSpecialeController {
 		pizzaRepository.save(formPizza);
 		return "redirect:/pizze";
 	}
-
-	@DeleteMapping("deletejs/{id}")
+	
+	@DeleteMapping("deletejsof/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
 
 		pizzaRepository.deleteById(id);
