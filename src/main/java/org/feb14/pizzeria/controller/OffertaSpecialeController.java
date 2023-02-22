@@ -51,12 +51,8 @@ public class OffertaSpecialeController {
 	public String create(@RequestParam(name = "pizzaId", required = true) Integer pizzaId, Model model) {
 		Optional<Pizza> res = pizzaRepository.findById(pizzaId);
 		OffertaSpeciale offerta = new OffertaSpeciale();
-
 		offerta.setPizza(res.get());
-
 		model.addAttribute("offerta", offerta);
-
-		model.addAttribute("pizza", new Pizza());
 		return "offerte/create";
 	}
 

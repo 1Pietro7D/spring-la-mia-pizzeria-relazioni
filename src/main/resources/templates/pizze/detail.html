@@ -10,7 +10,15 @@
 <div>[[${pizza.name}]]</div>
 <div>[[${pizza.description}]]</div>
 <div>[[${pizza.price}]]€</div>
-<div><img th:src="${pizza.imgPath}"/></div>
+<h3>Offerte:</h3>
+	<p th:if="${pizza.offerte.size()==0}">non ci sono offerte</p>
+	<div th:if="${pizza.offerte.size()>0}">
+	<ul>
+	<li th:each="offerta : ${pizza.offerte}">[[${offerta.titolo}]]</li>
+	</ul>
+	</div>
+<div>
+<img th:src="${pizza.imgPath}"/></div>
 <a th:href="@{./edit/{id}(id=${pizza.id})}" class="btn btn-primary">Edit</a>
 
  <button th:data-pizzaId="${pizza.id}" onclick="deletePizza(this)">Delete</button>
@@ -34,6 +42,7 @@
   }
 </script>
 <a th:href="@{|/offerte/create?pizzaId=${pizza.id}|}" class="btn">Crea nuova offerta</a>
+
 <a th:href="@{/pizze}" class="btn">Vedi lista pizze</a>
 
 </body>
