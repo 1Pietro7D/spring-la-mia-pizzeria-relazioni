@@ -51,7 +51,7 @@ public class Pizza {
 	private List<OffertaSpeciale> offerte;
 
 	@ManyToMany() // senza mappedBy si dice "owner", il lato dove viene gestita, per cui da pizza aggiungo ingredienr
-	@JoinTable(name = "ingredient_pizza", joinColumns = @JoinColumn(name = "ingredient_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+	@JoinTable(name = "ingredient_pizza", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
 	private List<Ingredient> ingredients;
 
 	public List<Ingredient> getIngredients() {

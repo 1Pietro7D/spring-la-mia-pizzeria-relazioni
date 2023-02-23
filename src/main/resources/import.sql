@@ -22,7 +22,7 @@ INSERT INTO springpizzeriacrud.ingredients(name) VALUES('tonno');
 INSERT INTO springpizzeriacrud.ingredients(name) VALUES('olive');
 INSERT INTO springpizzeriacrud.ingredients(name) VALUES('cipolla');
 INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(1,1);
-INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(1,1);
+INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(1,2);
 INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(2,1);
 INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(2,2);
 INSERT INTO springpizzeriacrud.ingredient_pizza( pizza_id, ingredient_id) VALUES(2,4);

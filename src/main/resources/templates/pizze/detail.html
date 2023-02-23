@@ -26,6 +26,21 @@
 			</li>
 		</ul>
 	</div>
+	<h3>Ingredienti:</h3>
+	<p th:if="${pizza.ingredients.size()==0}">non ci sono ingredienti</p>
+	<div th:if="${pizza.ingredients.size()>0}">
+		<ul class="container">
+			<li th:each="ingredient : ${pizza.ingredients}" class="row-cols">[[${ingredient.name}]]
+				<a th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}"
+				class="btn btn-primary">Edit</a>
+
+				<!--/*  form th:action="@{'/offerte/delete/{id}'(id=${offerta.id})}"
+					method="post" style="display: inline-block">
+					<button class="btn btn-danger" type="submit">Cancella</button>
+				</form */-->
+			</li>
+		</ul>
+	</div>
 	<div>
 		<img th:src="${pizza.imgPath}" />
 	</div>
