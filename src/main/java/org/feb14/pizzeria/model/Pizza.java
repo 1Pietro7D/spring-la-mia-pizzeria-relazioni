@@ -11,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -18,41 +21,51 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="pizze")
+@Table(name = "pizze")
 public class Pizza {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@NotNull
 	@NotEmpty
-	@Column(length = 50 , unique = false)
+	@Column(length = 50, unique = false)
 	private String name;
-	
+
 	// @Nonnull // Non gestisce la validazione per il db
-	@Column(length = 300 , unique = false) // nullable = false , non gestisce la validazione lato client
+	@Column(length = 300, unique = false) // nullable = false , non gestisce la validazione lato client
 	// TODO : lenght = 300, ritorna un varchar(300) è possibile come cosa?
 	@NotNull // gestisce lato client e server
 	@NotEmpty
 	private String description;
-	
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String imgPath;
-	
-	
+
 	@NotNull
 	@DecimalMin(value = "0.01", message = "Il prezzo deve essere maggiore di zero")
 	private BigDecimal price;
-	
-	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE)//  l'attributo di "mappedBy" punta alla proprietà nell'entità OffertaSpeciale.
+
+	@OneToMany(mappedBy = "pizza", cascade = CascadeType.REMOVE) // l'attributo di "mappedBy" punta alla proprietà														// nell'entità OffertaSpeciale.
 	private List<OffertaSpeciale> offerte;
-	
+
+	@ManyToMany() // senza mappedBy si dice "owner", il lato dove viene gestita, per cui da pizza aggiungo ingredienr
+	@JoinTable(name = "ingredient_pizza", joinColumns = @JoinColumn(name = "ingredient_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
+	private List<Ingredient> ingredients;
+
+	public List<Ingredient> getIngredients() {
+		return ingredients;
+	}
+
+	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = ingredients;
+	}
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public List<OffertaSpeciale> getOfferte() {
 		return offerte;
 	}
@@ -97,5 +110,5 @@ public class Pizza {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 }
