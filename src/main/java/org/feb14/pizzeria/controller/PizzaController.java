@@ -3,7 +3,9 @@ package org.feb14.pizzeria.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.feb14.pizzeria.model.Ingredient;
 import org.feb14.pizzeria.model.Pizza;
+import org.feb14.pizzeria.repository.IngredientRepository;
 import org.feb14.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	// iniettiamo automaticamente
 	private @Autowired PizzaRepository pizzaRepository;
+	private @Autowired IngredientRepository ingredientRepository;
 	// private @Autowired OffertaSpecialeRepository offertaRepository; // ?? why?
 
 	@GetMapping
@@ -52,6 +55,8 @@ public class PizzaController {
 
 	@GetMapping("/create")
 	public String create(Model model) {
+		List<Ingredient> ingredientList=ingredientRepository.findAll();
+		model.addAttribute("ingredients", ingredientList);
 		model.addAttribute("pizza", new Pizza());
 		return "pizze/create";
 	}
@@ -73,7 +78,10 @@ public class PizzaController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		Pizza pizza = pizzaRepository.getReferenceById(id);
+		List<Ingredient> ingredientList=ingredientRepository.findAll();
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredients", ingredientList);
 		return "pizze/update";
 	}
 

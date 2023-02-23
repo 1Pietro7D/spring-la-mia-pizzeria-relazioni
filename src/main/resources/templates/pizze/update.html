@@ -46,6 +46,15 @@
 							<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
 						</ul>
 					</div>
+					
+					<h3>Ingredients:</h3>
+					<div th:each="ingredient : ${ingredients}" class="form-check">
+						<input type="checkbox" class="form-check-input"
+							th:value="${ingredient.id}" th:field="*{ingredients}"
+							th:id="|ingredient_${ingredient.id}|"> <label
+							class="form-check-label" th:for="|ingredient_${ingredient.id}|">[[${ingredient.name}]]</label>
+					</div>
+					
 					<input type="text" class="d-none"
 						value="https://picsum.photos/200/300" name="imgPath" />
 					<button type="submit" class="btn btn-primary">Salva</button>
