@@ -27,14 +27,14 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	// iniettiamo automaticamente
 	private @Autowired PizzaRepository pizzaRepository;
-	private @Autowired OffertaSpecialeRepository offertaRepository;
+	private @Autowired OffertaSpecialeRepository offertaRepository; // ?? why?
 
 	@GetMapping
 	public String index(@RequestParam(name = "keyword", required = false) String keyword, Model modList) {
 		// http://localhost:8080/pizze?keyword=margh
 		List<Pizza> pizzaList;
-		if (keyword == null) {
-			pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze libro
+		if (keyword == null) { // TODO : mettere nel service
+			pizzaList = pizzaRepository.findAll(); // restituisce un elenco di istanze pizze
 		} else {
 			pizzaList = pizzaRepository.findByNameLike("%" + keyword + "%");
 		}
@@ -94,8 +94,6 @@ public class PizzaController {
 	
 	@DeleteMapping("deletejs/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
-		// elimina a cascata tutte le offerte relazionate alla pizza
-        
 	        pizzaRepository.deleteById(id);
 	        return ResponseEntity.ok("Pizza deleted successfully");
 	}
