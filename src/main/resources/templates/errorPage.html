@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>error</title>
-<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block> <!-- versione più intuitiva -->
+<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block>
+<!-- versione più intuitiva -->
 </head>
 <body>
 
-<h1>Si è verificato un'errore nella ricerca del piatto</h1>
-<p>general : [[${error}]]</p>
+	<h1>Si è verificato un'errore nella ricerca del piatto</h1>
+	<p>general : [[${error}]]</p>
 
 
-<a th:href="@{/pizze}">Vedi lista pizze</a>
+	<a th:href="@{/pizze}">Vedi lista pizze</a>
 
 </body>
 </html>

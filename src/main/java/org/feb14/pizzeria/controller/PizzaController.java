@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.feb14.pizzeria.model.Pizza;
-import org.feb14.pizzeria.repository.OffertaSpecialeRepository;
 import org.feb14.pizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +20,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
-
 @Controller
 @RequestMapping("/pizze")
 public class PizzaController {
 	// iniettiamo automaticamente
 	private @Autowired PizzaRepository pizzaRepository;
-	private @Autowired OffertaSpecialeRepository offertaRepository; // ?? why?
+	// private @Autowired OffertaSpecialeRepository offertaRepository; // ?? why?
 
 	@GetMapping
-	public String index(@RequestParam(name = "keyword", required = false) String keyword, Model modList) {
+	public String index(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		// http://localhost:8080/pizze?keyword=margh
 		List<Pizza> pizzaList;
 		if (keyword == null) { // TODO : mettere nel service
@@ -38,21 +36,18 @@ public class PizzaController {
 		} else {
 			pizzaList = pizzaRepository.findByNameLike("%" + keyword + "%");
 		}
-		modList.addAttribute("pizze", pizzaList);
+		model.addAttribute("pizze", pizzaList);
 		return "pizze/index";
 	}
 
 	@GetMapping("/{id}")
-	public String show(@PathVariable("id") Integer id, Model modShow) {
-		
-						
-				Optional<Pizza> pizza = pizzaRepository.findById(id); // restituisce un'istanza Optional con dentro
-																			// forse una pizza
-				modShow.addAttribute("pizza", pizza.get());
-				return "pizze/detail";
-			
-			
-		
+	public String show(@PathVariable("id") Integer id, Model model) {
+
+		Optional<Pizza> pizza = pizzaRepository.findById(id); // restituisce un'istanza Optional con dentro
+																// forse una pizza
+		model.addAttribute("pizza", pizza.get());
+		return "pizze/detail";
+
 	}
 
 	@GetMapping("/create")
@@ -62,8 +57,10 @@ public class PizzaController {
 	}
 
 	@PostMapping("/store") // gestirà le richieste di tipo POST di tipo /books/create
-	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, // TODO : approfondire BindingResult
-			Model modelCreate) {
+	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult // TODO :
+																										// approfondire
+																										// BindingResult
+	) {
 
 		if (bindingResult.hasErrors())
 			return "pizze/create";
@@ -72,38 +69,35 @@ public class PizzaController {
 		return "redirect:/pizze"; // genera un altro get e il ciclo si chiude
 
 	}
-	
+
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model) {
 		Pizza pizza = pizzaRepository.getReferenceById(id);
-		model.addAttribute("pizza",pizza);
+		model.addAttribute("pizza", pizza);
 		return "pizze/update";
 	}
-	
+
 	@PostMapping("/update/{id}")
-	public String update(
-			@Valid @ModelAttribute Pizza formPizza,
-			BindingResult result, Model model
-			) {
-		if(result.hasErrors())
+	public String update(@Valid @ModelAttribute Pizza formPizza, BindingResult result) {
+		if (result.hasErrors())
 			return "pizze/update";
-		
+
 		pizzaRepository.save(formPizza);
-		return "redirect:/pizze"; 
+		return "redirect:/pizze";
 	}
-	
+
 	@DeleteMapping("deletejs/{id}")
 	public ResponseEntity<String> deletePizza(@PathVariable("id") Integer id) {
-	        pizzaRepository.deleteById(id);
-	        return ResponseEntity.ok("Pizza deleted successfully");
+		pizzaRepository.deleteById(id);
+		return ResponseEntity.ok("Pizza deleted successfully");
 	}
-	
+
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
-	 
-	   pizzaRepository.deleteById(id);
-	   
-	   return "redirect:/pizze";
+
+		pizzaRepository.deleteById(id);
+
+		return "redirect:/pizze";
 	}
 
 }

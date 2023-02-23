@@ -36,13 +36,12 @@ public class OffertaSpecialeController {
 	}
 
 	@PostMapping("/store") // gestirà le richieste di tipo POST di tipo /books/create
-	public String store(@Valid @ModelAttribute("offerta") OffertaSpeciale formOfferta, BindingResult bindingResult,
-			Model modelCreate) {
+	public String store(@Valid @ModelAttribute("offerta") OffertaSpeciale formOfferta, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			return "offerte/create";
 
 		offertaRepository.save(formOfferta);
-		return "redirect:/pizze/"+ formOfferta.getPizza().getId();
+		return "redirect:/pizze/" + formOfferta.getPizza().getId();
 
 	}
 
@@ -54,19 +53,19 @@ public class OffertaSpecialeController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@Valid @ModelAttribute OffertaSpeciale formOfferta, BindingResult result, Model model) {
+	public String update(@Valid @ModelAttribute OffertaSpeciale formOfferta, BindingResult result) {
 		if (result.hasErrors())
 			return "offerte/edit";
 
 		offertaRepository.save(formOfferta);
-		return "redirect:/pizze/"+ formOfferta.getPizza().getId();
+		return "redirect:/pizze/" + formOfferta.getPizza().getId();
 	}
-	
+
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id) {
 		Integer pizza_id = offertaRepository.getReferenceById(id).getPizza().getId();
 		offertaRepository.deleteById(id);
 
-		return "redirect:/pizze/" +  pizza_id;
+		return "redirect:/pizze/" + pizza_id;
 	}
 }

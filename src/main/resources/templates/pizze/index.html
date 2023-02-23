@@ -3,21 +3,19 @@
 <head>
 <meta charset="utf-8">
 <title>listino</title>
-	<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block>
+<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block>
 </head>
 <body>
-<!--h1>title of <b th:text="example"></b></h1-->
-<div th:if="${pizze.size()==0}" >La lista è vuota</div>
-<a th:href="@{pizze/create}">Crea una nuova pizza</a>
-<div th:if="${pizze.size()>0}" th:each="pizza : ${pizze}">
- <a th:href="@{pizze/{id}(id=${pizza.id})}">
-    [[${pizza.name}]]
-  </a>
-</div>
- <form method="get" th:action="@{/pizze}">
-    <label for="search">Filtra per nome:</label>
-    <input type="text" id="search" name="keyword" />
-    <button type="submit">Cerca</button>
-  </form>
+	<!--h1>title of <b th:text="example"></b></h1-->
+	<div th:if="${pizze.size()==0}">La lista è vuota</div>
+	<a th:href="@{pizze/create}">Crea una nuova pizza</a>
+	<div th:if="${pizze.size()>0}" th:each="pizza : ${pizze}">
+		<a th:href="@{pizze/{id}(id=${pizza.id})}"> [[${pizza.name}]] </a>
+	</div>
+	<form method="get" th:action="@{/pizze}">
+		<label for="search">Filtra per nome:</label> <input type="text"
+			id="search" name="keyword" />
+		<button type="submit">Cerca</button>
+	</form>
 </body>
 </html>

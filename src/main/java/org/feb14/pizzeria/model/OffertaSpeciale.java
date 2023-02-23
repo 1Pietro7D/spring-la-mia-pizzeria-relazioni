@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name="offerte")// nome genera warn con file insert.sql
+@Table(name = "offerte") // nome genera warn con file insert.sql
 public class OffertaSpeciale {
 
 	@Id

@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <title>error 400</title>
-<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block> <!-- versione più intuitiva -->
+<th:block th:replace="~{frag/fragments :: bootstrap}"></th:block>
+<!-- versione più intuitiva -->
 </head>
 <body>
 
-<h1>Si è verificato un'errore nella ricerca del piatto</h1>
-<p>Bad request 400 : [[${error}]]</p>
+	<h1>Si è verificato un'errore nella ricerca della pagina</h1>
+	<p>Bad request 400 : [[${error}]]</p>
 
-<a th:href="@{/pizze}">Vedi lista pizze</a>
+	<a th:href="@{/pizze}">Vedi lista pizze</a>
 
 </body>
 </html>

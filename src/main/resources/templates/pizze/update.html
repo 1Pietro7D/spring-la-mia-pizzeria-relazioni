@@ -9,44 +9,49 @@
 <div class="container">
 	<h1>Nuova pizza</h1>
 	<hr/>
-	<form id="pizza-form" th:object="${pizza}" th:action="@{/pizze/update/{id}(id=${pizza.id})}"  method="post">
-	  	<ul>
-	      <li 
-	         th:each="err : ${#fields.allErrors()}" 
-	         th:text="${err}" class="text-danger">
-	      </li>
-  		</ul>
-	  	<div class="row">
-	  	<div class="col-8">
-	  	<label for="name" class="form-label">Nome:</label>
-  		<input type="text" class="form-control" id="name" th:field="*{name}" th:errorClass="is-invalid"/>  			
-		<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+		<form id="pizza-form" th:object="${pizza}"
+			th:action="@{/pizze/update/{id}(id=${pizza.id})}" method="post">
 			<ul>
-			   <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+				<li th:each="err : ${#fields.allErrors()}" th:text="${err}"
+					class="text-danger"></li>
 			</ul>
-  		</div>
-  		
-  		<label for="description" class="form-label">Descrizione:</label>
-  		<input type="text" class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid"/>
-  		<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
-			<ul>
-			   <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
-			</ul>
-  		</div>
-  		
-  		
-	  	<label for="price" class="form-label">Price</label>
-  		<input type="number" class="form-control" id="price" th:field="*{price}" th:errorClass="is-invalid"/>
-  		<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
-			<ul>
-			   <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
-			</ul>
-  		</div>
-  		<input type="text" class="d-none" value="https://picsum.photos/200/300" name="imgPath"/> 
-  		<button type="submit" class="btn btn-primary">Salva</button>
-  		</div>
-  		</div>
-	</form>
+			<div class="row">
+				<div class="col-8">
+					<label for="name" class="form-label">Nome:</label> <input
+						type="text" class="form-control" id="name" th:field="*{name}"
+						th:errorClass="is-invalid" />
+					<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+						</ul>
+					</div>
+
+					<label for="description" class="form-label">Descrizione:</label> <input
+						type="text" class="form-control" id="description"
+						th:field="*{description}" th:errorClass="is-invalid" />
+					<div th:if="${#fields.hasErrors('description')}"
+						class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('description')}"
+								th:text="${err}"></li>
+						</ul>
+					</div>
+
+
+					<label for="price" class="form-label">Price</label> <input
+						type="number" class="form-control" id="price" th:field="*{price}"
+						th:errorClass="is-invalid" />
+					<div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+						</ul>
+					</div>
+					<input type="text" class="d-none"
+						value="https://picsum.photos/200/300" name="imgPath" />
+					<button type="submit" class="btn btn-primary">Salva</button>
+				</div>
+			</div>
+		</form>
 	</div>
 <a th:href="@{/pizze}">Vedi lista pizze</a>
 
