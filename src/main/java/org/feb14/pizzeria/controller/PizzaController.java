@@ -62,13 +62,13 @@ public class PizzaController {
 	}
 
 	@PostMapping("/store") // gestirà le richieste di tipo POST di tipo /books/create
-	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult // TODO :
-																										// approfondire
-																										// BindingResult
+	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model
 	) {
 
-		if (bindingResult.hasErrors())
-			return "pizze/create";
+		if (bindingResult.hasErrors()) {
+			List<Ingredient> ingredientList=ingredientRepository.findAll();
+			model.addAttribute("ingredients", ingredientList);
+			return "pizze/create";}
 
 		pizzaRepository.save(formPizza);
 		return "redirect:/pizze"; // genera un altro get e il ciclo si chiude
@@ -86,9 +86,11 @@ public class PizzaController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@Valid @ModelAttribute Pizza formPizza, BindingResult result) {
-		if (result.hasErrors())
-			return "pizze/update";
+	public String update(@Valid @ModelAttribute Pizza formPizza, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			List<Ingredient> ingredientList=ingredientRepository.findAll();
+			model.addAttribute("ingredients", ingredientList);
+			return "pizze/update";}
 
 		pizzaRepository.save(formPizza);
 		return "redirect:/pizze";

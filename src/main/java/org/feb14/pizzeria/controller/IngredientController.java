@@ -32,8 +32,6 @@ public class IngredientController {
 	
 	@PostMapping("/update/{id}")
 	public String update(@Valid @ModelAttribute Ingredient formIngredient, @PathVariable("id") Integer id, @RequestParam("referer") String referer) {
-		
-
 		ingredientRepository.save(formIngredient);
 		return "redirect:" + referer;
 	}
@@ -42,7 +40,7 @@ public class IngredientController {
 	public String delete(@PathVariable("id") Integer id, HttpServletRequest request) {
 		ingredientRepository.deleteById(id);
 		String referer = request.getHeader("Referer"); // ritorno l'URI di provienienza, + dinamic
-		return "redirect:" + referer;
+		return "redirect:" + referer;//WARN, se sei su un detail futuro di ingrediente.. e lo cancelli non esiste più la pagina, da gestire
 	}
 	
 	

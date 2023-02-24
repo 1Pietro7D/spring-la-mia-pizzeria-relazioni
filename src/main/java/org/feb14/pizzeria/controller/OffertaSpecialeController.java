@@ -66,6 +66,6 @@ public class OffertaSpecialeController {
 	public String delete(@PathVariable("id") Integer id, HttpServletRequest request) {
 		offertaRepository.deleteById(id);
 		String referer = request.getHeader("Referer"); // ritorno l'URI di provienienza, + dinamic
-		return "redirect:" + referer;
+		return "redirect:" + referer; //WARN, se sei su un detail futuro di offerta.. e lo cancelli non esiste più la pagina, da gestire
 	}
 }
