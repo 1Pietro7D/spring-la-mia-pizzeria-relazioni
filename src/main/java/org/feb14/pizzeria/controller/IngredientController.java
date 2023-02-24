@@ -26,7 +26,7 @@ public class IngredientController {
 		String referer = request.getHeader("Referer"); // qui mistero ritorna URL completo
 		Ingredient ingredient = ingredientRepository.getReferenceById(id); 
 		model.addAttribute("ingredient", ingredient);
-		model.addAttribute("referer", referer.substring(referer.indexOf('/'))); //infatti rimuovo il dominio
+		model.addAttribute("referer", referer.substring(referer.indexOf('/'))); //infatti rimuovo il dominio e lo passo al form che poi lo passa al update
 		return "ingredients/edit";
 	}
 	
@@ -35,6 +35,13 @@ public class IngredientController {
 		
 
 		ingredientRepository.save(formIngredient);
+		return "redirect:" + referer;
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id, HttpServletRequest request) {
+		ingredientRepository.deleteById(id);
+		String referer = request.getHeader("Referer"); // ritorno l'URI di provienienza, + dinamic
 		return "redirect:" + referer;
 	}
 	

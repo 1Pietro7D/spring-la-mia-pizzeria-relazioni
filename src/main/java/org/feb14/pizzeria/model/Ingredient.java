@@ -2,6 +2,9 @@ package org.feb14.pizzeria.model;
 
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +23,8 @@ public class Ingredient {
 	private String name;
 	
 	
-	@ManyToMany(mappedBy = "ingredients")
+	@ManyToMany(mappedBy = "ingredients")// cascade = CascadeType.REMOVE -- questo cecchina tutte le pizze anche
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List <Pizza> pizze;
 
 	public List<Pizza> getPizze() {
