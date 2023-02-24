@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
@@ -62,10 +63,9 @@ public class OffertaSpecialeController {
 	}
 
 	@PostMapping("/delete/{id}")
-	public String delete(@PathVariable("id") Integer id) {
-		Integer pizza_id = offertaRepository.getReferenceById(id).getPizza().getId();
+	public String delete(@PathVariable("id") Integer id, HttpServletRequest request) {
 		offertaRepository.deleteById(id);
-
-		return "redirect:/pizze/" + pizza_id;
+		String referer = request.getHeader("Referer"); // ritorno l'URI di provienienza, + dinamic
+		return "redirect:/" + referer;
 	}
 }

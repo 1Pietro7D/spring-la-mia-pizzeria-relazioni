@@ -31,8 +31,11 @@
 	<div th:if="${pizza.ingredients.size()>0}">
 		<ul class="container">
 			<li th:each="ingredient : ${pizza.ingredients}" class="row-cols">[[${ingredient.name}]]
-				<!-- /*a th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}"
-				class="btn btn-primary">Edit</a */-->
+				<a th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}"
+				class="btn btn-primary">Edit</a>
+				
+
+
 
 				<!--/*  form th:action="@{'/offerte/delete/{id}'(id=${offerta.id})}"
 					method="post" style="display: inline-block">
@@ -47,7 +50,16 @@
 	<a th:href="@{./edit/{id}(id=${pizza.id})}" class="btn btn-primary">Edit</a>
 
 	<button th:data-pizzaId="${pizza.id}" onclick="deletePizza(this)">Delete</button>
-	<script th:inline="javascript">
+	
+	<a th:href="@{|/offerte/create?pizzaId=${pizza.id}|}" class="btn">Crea
+		nuova offerta</a>
+
+	<a th:href="@{/pizze}" class="btn">Vedi lista pizze</a>
+
+</body>
+
+
+<script>
   function deletePizza(button) {
 	const id = button.getAttribute('data-pizzaId');
     if (confirm("Are you sure you want to delete this pizza?")) {
@@ -66,10 +78,4 @@
     }
   }
 </script>
-	<a th:href="@{|/offerte/create?pizzaId=${pizza.id}|}" class="btn">Crea
-		nuova offerta</a>
-
-	<a th:href="@{/pizze}" class="btn">Vedi lista pizze</a>
-
-</body>
 </html>
