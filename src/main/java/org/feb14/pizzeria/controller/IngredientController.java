@@ -25,6 +25,8 @@ public class IngredientController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) { //// https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html
 		String referer = request.getHeader(HttpHeaders.REFERER); // VERSIONE PERFORMANTE non richiede di splittare il risultato in base al contesto del service
+		// utilizzando la costante HttpHeaders.REFERER, si ha la garanzia che il nome dell'header corrisponde al nome utilizzato dalle specifiche HTTP/1.1
+		// da console lo vedi in network protocol
 		Ingredient ingredient = ingredientRepository.getReferenceById(id); 
 		model.addAttribute("ingredient", ingredient);
 		if(referer != null)
