@@ -3,6 +3,7 @@ package org.feb14.pizzeria.controller;
 import org.feb14.pizzeria.model.Ingredient;
 import org.feb14.pizzeria.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +23,14 @@ public class IngredientController {
 	private @Autowired IngredientRepository ingredientRepository;
 	
 	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
-		String referer = request.getHeader("Referer"); // qui mistero ritorna URL completo
+	public String edit(@PathVariable("id") Integer id, Model model, HttpServletRequest request) { //// https://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html
+		String referer = request.getHeader(HttpHeaders.REFERER); // VERSIONE PERFORMANTE non richiede di splittare il risultato in base al contesto del service
 		Ingredient ingredient = ingredientRepository.getReferenceById(id); 
 		model.addAttribute("ingredient", ingredient);
-		model.addAttribute("referer", referer.substring(referer.indexOf('/'))); //infatti rimuovo il dominio e lo passo al form che poi lo passa al update
+		if(referer != null)
+		model.addAttribute("referer", referer);
+		else model.addAttribute("referer", "/");
+		// else model.addAttribute("referer", "/ingredients/show/" + id); future show
 		return "ingredients/edit";
 	}
 	
@@ -39,7 +43,7 @@ public class IngredientController {
 	@PostMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id, HttpServletRequest request) {
 		ingredientRepository.deleteById(id);
-		String referer = request.getHeader("Referer"); // ritorno l'URI di provienienza, + dinamic
+		String referer = request.getHeader(HttpHeaders.REFERER); // ritorno l'URI di provienienza, + dinamic
 		return "redirect:" + referer;//WARN, se sei su un detail futuro di ingrediente.. e lo cancelli non esiste più la pagina, da gestire
 	}
 	
